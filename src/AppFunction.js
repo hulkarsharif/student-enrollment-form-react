@@ -1,7 +1,6 @@
 import { studentAPI } from "./api/Student";
 import React, { useState, useEffect } from "react";
 
-import { v4 as uuid } from "uuid";
 import "./App.css";
 
 const AppFunction = () => {
@@ -149,29 +148,13 @@ const AppFunction = () => {
     const submitEdit = () => {
         studentAPI
             .update(editingStudentId, {
-                firstName,
-                lastName,
-                email,
-                className
+                firstNameEditValue,
+                lastNameEditValue,
+                emailEditValue,
+                classNameEditValue
             })
             .then((_) => {
                 setStudents((prevStudents) => {
-                    // setStudents((prevStudents) => {
-                    //     const updatedStudents = prevStudents.map((student) => {
-                    //         if (student.id === editingStudentId) {
-                    //             const copy = {
-                    //                 ...student,
-                    //                 firstName: firstNameEditValue,
-                    //                 lastName: lastNameEditValue,
-                    //                 email: emailEditValue,
-                    //                 className: classNameEditValue
-                    //             };
-                    //             return copy;
-                    //         }
-                    //         return student;
-                    //     });
-                    //     return updatedStudents;
-                    // });
                     const copyStudents = [];
                     for (let i = 0; i < prevStudents.length; i++) {
                         const student = prevStudents[i];
@@ -192,18 +175,20 @@ const AppFunction = () => {
             .catch((err) => {
                 console.log(err);
             });
+
         setShowEditModal(false);
     };
     const closeEditModal = () => {
         setShowEditModal(false);
         setEditingStudentId(null);
     };
+
     return (
         <main>
             <h1>Students Enrollment Form</h1>
             <form onSubmit={addStudent}>
                 <div className="form-control">
-                    <label for="firstName">Student First Name: </label>
+                    <label htmlFor="firstName">Student First Name: </label>
                     <input
                         type="text"
                         placeholder="First Name"
@@ -212,7 +197,7 @@ const AppFunction = () => {
                         value={firstName}
                     />
 
-                    <label for="lastName">Student Last Name: </label>
+                    <label htmlFor="lastName">Student Last Name: </label>
                     <input
                         type="text"
                         placeholder="Last Name"
@@ -221,7 +206,7 @@ const AppFunction = () => {
                         value={lastName}
                     />
 
-                    <label for="email">Student Email: </label>
+                    <label htmlFor="email">Student Email: </label>
                     <input
                         type="email"
                         placeholder="Email"
@@ -230,7 +215,7 @@ const AppFunction = () => {
                         value={email}
                     />
 
-                    <label for="className">Class: </label>
+                    <label htmlFor="className">Class: </label>
                     <select
                         id="className"
                         value={className}
@@ -302,7 +287,7 @@ const AppFunction = () => {
                             &times;
                         </span>
                         <h2>Edit Student Data</h2>
-                        <label for="editingFirstName">
+                        <label htmlFor="editingFirstName">
                             Student First Name:
                         </label>
                         <input
@@ -312,7 +297,9 @@ const AppFunction = () => {
                             onChange={handleFirstNameEdit}
                         />
                         <br />
-                        <label for="editingLastName">Student Last Name:</label>
+                        <label htmlFor="editingLastName">
+                            Student Last Name:
+                        </label>
                         <input
                             id="editingLastName"
                             type="text"
@@ -320,7 +307,7 @@ const AppFunction = () => {
                             onChange={handleLastNameEdit}
                         />
                         <br />
-                        <label for="editingemail">Student Email: </label>
+                        <label htmlFor="editingemail">Student Email: </label>
                         <input
                             id="editingEmail"
                             type="email"
@@ -328,7 +315,7 @@ const AppFunction = () => {
                             onChange={handleEmailEdit}
                         />
                         <br />
-                        <label for="editingClassName">Class: </label>
+                        <label htmlFor="editingClassName">Class: </label>
                         <select
                             id="editingClassName"
                             value={classNameEditValue}
