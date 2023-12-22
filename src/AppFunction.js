@@ -86,6 +86,7 @@ const AppFunction = () => {
             setInputError(true);
             return;
         }
+
         studentAPI
             .add({ firstName, lastName, email, className })
             .then((response) => {
@@ -115,25 +116,26 @@ const AppFunction = () => {
             });
     };
 
-    const handleFirstNameEdit = (e) => {
+    const handleOnChangeFirstNameEdit = (e) => {
         setFirstNameEditValue(e.target.value);
     };
 
-    const handleLastNameEdit = (e) => {
+    const handleOnChangeLastNameEdit = (e) => {
         setLastNameEditValue(e.target.value);
     };
 
-    const handleEmailEdit = (e) => {
+    const handleOnChangeEmailEdit = (e) => {
         setEmailEditValue(e.target.value);
     };
 
-    const handleClassNameEdit = (e) => {
+    const handleOnChangeClassNameEdit = (e) => {
         setClassNameEditValue(e.target.value);
     };
 
     const editStudent = (studentId) => {
         setEditingStudentId(studentId);
         setShowEditModal(true);
+
         for (const student of students) {
             if (student.id === studentId) {
                 setFirstNameEditValue(student.firstName);
@@ -178,6 +180,7 @@ const AppFunction = () => {
 
         setShowEditModal(false);
     };
+
     const closeEditModal = () => {
         setShowEditModal(false);
         setEditingStudentId(null);
@@ -294,7 +297,7 @@ const AppFunction = () => {
                             id="editingFirstName"
                             type="text"
                             value={firstNameEditValue}
-                            onChange={handleFirstNameEdit}
+                            onChange={handleOnChangeFirstNameEdit}
                         />
                         <br />
                         <label htmlFor="editingLastName">
@@ -304,7 +307,7 @@ const AppFunction = () => {
                             id="editingLastName"
                             type="text"
                             value={lastNameEditValue}
-                            onChange={handleLastNameEdit}
+                            onChange={handleOnChangeLastNameEdit}
                         />
                         <br />
                         <label htmlFor="editingemail">Student Email: </label>
@@ -312,14 +315,14 @@ const AppFunction = () => {
                             id="editingEmail"
                             type="email"
                             value={emailEditValue}
-                            onChange={handleEmailEdit}
+                            onChange={handleOnChangeEmailEdit}
                         />
                         <br />
                         <label htmlFor="editingClassName">Class: </label>
                         <select
                             id="editingClassName"
                             value={classNameEditValue}
-                            onChange={handleClassNameEdit}
+                            onChange={handleOnChangeClassNameEdit}
                         >
                             <option value="">Select Class</option>
                             <option value="ALGEBRA">ALGEBRA</option>
